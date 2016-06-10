@@ -1,8 +1,8 @@
-Placeholder text for portfolio redesign.
+# Prepare your scaffolding
 
-Goal:
+Clone this repo and run the setup script:
 
-    -complete portfolio re-design through the eyes of a trained designer.
-    
-
-# portfolio
+    git clone git://github.com/jacobthemyth/cool-scaffolding.git [name of your project]
+    cd [name of your project]
+    rm -rf .git
+    ./setup.sh

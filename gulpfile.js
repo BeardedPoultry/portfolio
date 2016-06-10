@@ -27,10 +27,9 @@
   gulp.task('scripts', function () {
     return gulp.src('scripts/**/*.js')
       .pipe($.sourcemaps.init())
-      .pipe($.plumber())
-      .pipe($.babel())
+      .pipe($.babel().on('error', $.util.log))
       .pipe($.wrapCommonjs({
-        relativePath: 'scripts',
+        baseDir: 'scripts',
         pathModifier: function (path) {
           return path.replace(/.js$/, '');
         }
@@ -43,8 +42,7 @@
 
   gulp.task('templates', function(){
     gulp.src('templates/**/*.hbs')
-      .pipe($.plumber())
-      .pipe($.handlebars())
+      .pipe($.handlebars().on('error', $.util.log))
       .pipe($.wrap('Handlebars.template(<%= contents %>)'))
       .pipe($.declare({
         namespace: 'JST',
@@ -55,9 +53,7 @@
       .pipe(reload({stream: true}));
   });
 
-  gulp.task('build', ['scripts', 'templates', 'styles'], function(){});
-
-  gulp.task('serve', ['build'], function () {
+  gulp.task('serve', ['scripts', 'templates', 'styles'], function () {
     browserSync({
       notify: false,
       port: 9000,
